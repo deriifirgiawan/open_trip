@@ -60,12 +60,44 @@ class _MainHomeState extends State<MainHome> {
                 horizontal: ResponsiveUtil.getHorizontalPadding(),
               ),
               child: Align(
-                alignment: Alignment.centerLeft,
-                child: AppLogo(
-                  appLogoType:
-                      _isScrolled ? AppLogoType.light : AppLogoType.dark,
-                ),
-              ),
+                  alignment: Alignment.centerLeft,
+                  child: Row(
+                    mainAxisSize: MainAxisSize.max,
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: [
+                      AppLogo(
+                        appLogoType:
+                            _isScrolled ? AppLogoType.light : AppLogoType.dark,
+                      ),
+                      Stack(
+                        children: [
+                          IconButton(
+                            onPressed: () => {},
+                            icon: Icon(Icons.shopping_cart, size: 30),
+                          ),
+                          Positioned(
+                            right: 5,
+                            top: 5,
+                            child: Container(
+                              padding: EdgeInsets.all(5),
+                              decoration: BoxDecoration(
+                                color: Colors.red,
+                                shape: BoxShape.circle,
+                              ),
+                              child: Text(
+                                '3', // Ganti dengan jumlah produk di keranjang
+                                style: TextStyle(
+                                    color: Colors.white,
+                                    fontSize: 12,
+                                    fontWeight: FontWeight.bold),
+                              ),
+                            ),
+                          ),
+                        ],
+                      )
+                    ],
+                  )),
             ),
             iconTheme: IconThemeData(
               color: _isScrolled ? Colors.black : Colors.white,

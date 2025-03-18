@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:open_trip/core/themes/colors.dart';
+import 'package:open_trip/core/widgets/chip_badge/chip_badge.dart';
 import 'package:open_trip/models/TripDataModel.dart';
 import 'package:open_trip/utils/responsive_util.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -48,6 +49,12 @@ class DetailHeader extends StatelessWidget {
                     fontSize: 12.sp,
                     color: Colors.black54,
                   ),
+                ),
+                SizedBox(width: 6.w),
+                ChipBadge(
+                  text: tripModel.type,
+                  textColor:
+                      tripModel.type == "Open Trip" ? Colors.green : Colors.red,
                 ),
               ],
             ),

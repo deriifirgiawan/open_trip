@@ -15,6 +15,7 @@ class TripCard extends StatefulWidget {
   final int reviews;
   final VoidCallback onTap;
   final TypeCardSize? typeCardSize;
+  final String type;
 
   const TripCard(
       {super.key,
@@ -24,7 +25,8 @@ class TripCard extends StatefulWidget {
       required this.price,
       required this.rating,
       required this.reviews,
-      required this.onTap});
+      required this.onTap,
+      required this.type});
 
   @override
   State<StatefulWidget> createState() {
@@ -73,8 +75,10 @@ class _TripCardState extends State<TripCard> {
                       child: Padding(
                         padding: EdgeInsets.only(right: 12.r),
                         child: ChipBadge(
-                          text: "Public",
-                          backgroundColor: Colors.green,
+                          text: widget.type,
+                          backgroundColor: widget.type == "Open Trip"
+                              ? Colors.green
+                              : Colors.red,
                         ),
                       )),
 
@@ -188,8 +192,10 @@ class _TripCardState extends State<TripCard> {
                         ),
                         SizedBox(width: 8.w),
                         ChipBadge(
-                          text: "Public",
-                          backgroundColor: Colors.green,
+                          text: widget.type,
+                          backgroundColor: widget.type == "Open Trip"
+                              ? Colors.green
+                              : Colors.red,
                         ),
                       ],
                     ),

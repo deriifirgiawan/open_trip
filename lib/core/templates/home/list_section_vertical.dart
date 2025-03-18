@@ -40,6 +40,7 @@ class ListSectionVertical extends StatelessWidget {
                   price: trip.price,
                   rating: trip.rating,
                   reviews: trip.reviews,
+                  type: trip.type,
                   onTap: () {
                     context.go(RootRouteName.detailScreen, extra: trip);
                   },

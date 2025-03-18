@@ -3,7 +3,7 @@ import 'package:open_trip/models/TripDataModel.dart';
 final List<TripModel> trips = [
   TripModel(
     id: 1,
-    title: "Trip ke Raja Ampat 4H3M",
+    title: "Menjelajah Raja Ampat 4H3M",
     photo:
         "https://images.unsplash.com/photo-1613382237354-eaebbebe6eba?q=80&w=2160&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
     photos: [
@@ -29,7 +29,7 @@ final List<TripModel> trips = [
   ),
   TripModel(
     id: 2,
-    title: "Trip ke Bromo Sunrise 2H1M",
+    title: "Berburu Sunrise di Bromo 2H1M",
     photo:
         "https://images.unsplash.com/photo-1588668214407-6ea9a6d8c272?q=80&w=2942&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
     photos: [
@@ -49,7 +49,7 @@ final List<TripModel> trips = [
   ),
   TripModel(
     id: 3,
-    title: "Trip ke Labuan Bajo 3H2M",
+    title: "Gass Labuan Bajo 3H2M",
     photos: [
       "https://images.unsplash.com/photo-1619880889144-d6e252999afa?q=80&w=3174&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
       "https://images.unsplash.com/photo-1602486493959-78e7be266a62?q=80&w=3024&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
@@ -70,7 +70,7 @@ final List<TripModel> trips = [
   ),
   TripModel(
     id: 4,
-    title: "Trip ke Pulau Derawan 3H2M",
+    title: "Kenalan dengan Pulau Derawan 3H2M",
     photo:
         "https://plus.unsplash.com/premium_photo-1668883188861-39974ed9ad99?q=80&w=2400&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
     photos: [
@@ -90,7 +90,7 @@ final List<TripModel> trips = [
   ),
   TripModel(
     id: 5,
-    title: "Trip ke Dieng 2H1M",
+    title: "Ekspedisi ke Dieng 2H1M",
     photo:
         "https://images.unsplash.com/photo-1571738318198-fda6afce5348?q=80&w=3164&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
     photos: [

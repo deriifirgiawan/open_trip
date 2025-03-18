@@ -8,9 +8,11 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
 
 class ListFavoritePlace extends StatelessWidget {
-  const ListFavoritePlace({super.key, required this.title});
+  const ListFavoritePlace(
+      {super.key, required this.title, this.refresh = false});
 
   final String title;
+  final bool refresh;
 
   @override
   Widget build(BuildContext context) {
@@ -52,9 +54,16 @@ class ListFavoritePlace extends StatelessWidget {
                                   price: trip.price,
                                   rating: trip.rating,
                                   reviews: trip.reviews,
+                                  type: trip.type,
                                   onTap: () {
-                                    context.go(RootRouteName.detailScreen,
-                                        extra: trip);
+                                    if (refresh) {
+                                      context.replace(
+                                          RootRouteName.detailScreen,
+                                          extra: trip);
+                                    } else {
+                                      context.go(RootRouteName.detailScreen,
+                                          extra: trip);
+                                    }
                                   },
                                 ))));
                   },
