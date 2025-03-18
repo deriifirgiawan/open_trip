@@ -1,0 +1,1 @@
+enum TypeTextInput { input, selectInput }
