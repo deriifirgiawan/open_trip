@@ -1,9 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:go_router/go_router.dart';
+import 'package:open_trip/bloc/cart/cart_cubit.dart';
 import 'package:open_trip/constants/image_constant.dart';
 import 'package:open_trip/core/templates/home/input_search_home.dart';
 import 'package:open_trip/core/widgets/app_logo/app_logo.dart';
+import 'package:open_trip/models/TripDataModel.dart';
+import 'package:open_trip/routes/route_name.dart';
 import 'package:open_trip/utils/responsive_util.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 class MainHome extends StatefulWidget {
   const MainHome({super.key, this.child});
@@ -73,27 +78,32 @@ class _MainHomeState extends State<MainHome> {
                       Stack(
                         children: [
                           IconButton(
-                            onPressed: () => {},
+                            onPressed: () =>
+                                context.push(RootRouteName.orderScreen),
                             icon: Icon(Icons.shopping_cart, size: 30),
                           ),
                           Positioned(
-                            right: 5,
-                            top: 5,
-                            child: Container(
-                              padding: EdgeInsets.all(5),
-                              decoration: BoxDecoration(
-                                color: Colors.red,
-                                shape: BoxShape.circle,
-                              ),
-                              child: Text(
-                                '3', // Ganti dengan jumlah produk di keranjang
-                                style: TextStyle(
-                                    color: Colors.white,
-                                    fontSize: 12,
-                                    fontWeight: FontWeight.bold),
-                              ),
-                            ),
-                          ),
+                              right: 5,
+                              top: 5,
+                              child: BlocBuilder<CartCubit, List<TripModel>>(
+                                  builder: (context, trips) {
+                                return trips.isNotEmpty
+                                    ? Container(
+                                        padding: EdgeInsets.all(5),
+                                        decoration: BoxDecoration(
+                                          color: Colors.red,
+                                          shape: BoxShape.circle,
+                                        ),
+                                        child: Text(
+                                          trips.length.toString(),
+                                          style: TextStyle(
+                                              color: Colors.white,
+                                              fontSize: 12,
+                                              fontWeight: FontWeight.bold),
+                                        ),
+                                      )
+                                    : SizedBox();
+                              })),
                         ],
                       )
                     ],

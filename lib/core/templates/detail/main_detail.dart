@@ -124,6 +124,9 @@ class _MainDetailState extends State<MainDetail> {
         canPop: false,
         onPopInvokedWithResult: (didPop, result) async {
           if (didPop) {
+            if (context.canPop()) {
+              return context.pop();
+            }
             return context.go(RootRouteName.homeScreen);
           }
 
@@ -142,14 +145,13 @@ class _MainDetailState extends State<MainDetail> {
                       _isScrolled ? ColorPalette.primary : Colors.transparent,
                   elevation: _isScrolled ? 4.0 : 0.0,
                   centerTitle: true,
-                  title: Padding(
-                    padding: EdgeInsets.symmetric(
-                      horizontal: ResponsiveUtil.getHorizontalPadding(),
-                    ),
-                    child: Align(
-                        alignment: Alignment.centerLeft,
+                  leading: Align(
+                      alignment: Alignment.centerLeft,
+                      child: Padding(
+                        padding: EdgeInsets.only(
+                            left: ResponsiveUtil.getHorizontalPadding()),
                         child: IconButton(
-                          onPressed: () => context.go(RootRouteName.homeScreen),
+                          onPressed: () => context.pop(),
                           style: IconButton.styleFrom(
                             backgroundColor:
                                 Colors.white, // Warna latar belakang putih
@@ -161,8 +163,8 @@ class _MainDetailState extends State<MainDetail> {
                                 : Colors
                                     .black, // Sesuaikan warna ikon agar kontras
                           ),
-                        )),
-                  ),
+                        ),
+                      )),
                   iconTheme: IconThemeData(
                     color: _isScrolled ? Colors.black : Colors.white,
                   ),

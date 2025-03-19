@@ -61,7 +61,7 @@ class ListFavoritePlace extends StatelessWidget {
                                           RootRouteName.detailScreen,
                                           extra: trip);
                                     } else {
-                                      context.go(RootRouteName.detailScreen,
+                                      context.push(RootRouteName.detailScreen,
                                           extra: trip);
                                     }
                                   },

@@ -42,7 +42,7 @@ class ListSectionVertical extends StatelessWidget {
                   reviews: trip.reviews,
                   type: trip.type,
                   onTap: () {
-                    context.go(RootRouteName.detailScreen, extra: trip);
+                    context.push(RootRouteName.detailScreen, extra: trip);
                   },
                 ),
               );

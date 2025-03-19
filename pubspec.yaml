@@ -51,6 +51,8 @@ dependencies:
   flutter_native_splash: ^2.4.4
   flutter_launcher_icons: ^0.14.3
   smooth_page_indicator: ^1.2.1
+  bloc: ^9.0.0
+  flutter_bloc: ^9.1.0
 
 dev_dependencies:
   flutter_test:
@@ -91,6 +93,7 @@ flutter:
     - assets/images/banner.png
     - assets/illustrations/logo_dark.svg
     - assets/illustrations/logo_light.svg
+    - assets/illustrations/success.svg
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/to/resolution-aware-images
