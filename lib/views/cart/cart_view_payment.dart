@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:go_router/go_router.dart';
+import 'package:open_trip/bloc/cart/cart_cubit.dart';
 import 'package:open_trip/core/templates/transaction/transaction_detail.dart';
 import 'package:open_trip/core/templates/transaction/transcation_method.dart';
 import 'package:open_trip/core/themes/colors.dart';
@@ -21,20 +23,6 @@ class CartViewPayment extends StatefulWidget {
 }
 
 class _CartViewPaymentState extends State<CartViewPayment> {
-  List<TripModel> _selectedTrip = [];
-
-  void addToSelected(TripModel item) {
-    setState(() {
-      bool exists = _selectedTrip.any((trip) => trip.id == item.id);
-
-      if (exists) {
-        _selectedTrip.removeWhere((trip) => trip.id == item.id);
-      } else {
-        _selectedTrip = [..._selectedTrip, item];
-      }
-    });
-  }
-
   @override
   Widget build(BuildContext context) {
     return PopScope(
@@ -100,7 +88,12 @@ class _CartViewPaymentState extends State<CartViewPayment> {
                     ],
                   ),
                   ElevatedButton(
-                    onPressed: () => context.go(RootRouteName.successScreen),
+                    onPressed: () {
+                      for (final item in widget.listTrip) {
+                        context.read<CartCubit>().removeFromCart(item.id);
+                      }
+                      context.go(RootRouteName.successScreen);
+                    },
                     child: Text("Bayar Sekarang"),
                   )
                 ],

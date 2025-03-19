@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:flutter_svg/svg.dart';
 import 'package:go_router/go_router.dart';
-import 'package:open_trip/constants/trips_constant.dart';
+import 'package:open_trip/bloc/cart/cart_cubit.dart';
+import 'package:open_trip/constants/image_constant.dart';
 import 'package:open_trip/core/templates/home/trip_card.dart';
 import 'package:open_trip/core/themes/colors.dart';
 import 'package:open_trip/models/TripDataModel.dart';
@@ -66,71 +69,87 @@ class _CartViewState extends State<CartView> {
                 ),
               ),
             ),
-            body: ListView.builder(
-              padding: EdgeInsets.symmetric(
-                horizontal: ResponsiveUtil.getHorizontalPadding(),
-                vertical: 12.w,
-              ),
-              itemCount: trips.length,
-              itemBuilder: (context, index) {
-                final trip = trips[index];
-
-                return Padding(
-                  padding:
-                      EdgeInsets.only(bottom: 8), // Tambahkan jarak antar item
-                  child: TripCard(
-                    typeCardSize: TypeCardSize.small,
-                    imageUrl: trip.photo,
-                    title: trip.title,
-                    price: trip.price,
-                    rating: trip.rating,
-                    reviews: trip.reviews,
-                    type: trip.type,
-                    typeCard: TypeCard.order,
-                    isSelected: _selectedTrip.any((item) => item.id == trip.id),
-                    onTap: () => {addToSelected(trip)},
-                  ),
+            body: BlocBuilder<CartCubit, List<TripModel>>(
+                builder: (context, trips) {
+              if (trips.isEmpty) {
+                return Center(
+                  child: SvgPicture.asset(ImageConstant.emptyState),
                 );
-              },
-            ),
-            bottomNavigationBar: Container(
-              width: double.infinity,
-              color: Colors.white,
-              child: Padding(
-                  padding: EdgeInsets.symmetric(
-                      horizontal: ResponsiveUtil.getHorizontalPadding(),
-                      vertical: 12.w),
-                  child: Row(
-                    mainAxisSize: MainAxisSize.min,
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    children: [
-                      Column(
-                        mainAxisSize: MainAxisSize.min,
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Text("Total",
-                              style: TextStyle(
-                                  fontSize: 12.sp,
-                                  fontWeight: FontWeight.w600)),
-                          Text(formatCurrency(getTotalPrice(_selectedTrip)),
-                              style: TextStyle(
-                                  fontSize: 14.sp, fontWeight: FontWeight.bold))
-                        ],
-                      ),
-                      ElevatedButton(
-                          onPressed: () => {
-                                if (_selectedTrip.isNotEmpty)
-                                  {
-                                    context.push(
-                                        RootRouteName.orderPaymentScreen,
-                                        extra: _selectedTrip)
-                                  }
-                              },
-                          child: Text("Bayar Sekarang"))
-                    ],
-                  )),
-            )),
+              }
+              return ListView.builder(
+                padding: EdgeInsets.symmetric(
+                  horizontal: ResponsiveUtil.getHorizontalPadding(),
+                  vertical: 12.w,
+                ),
+                itemCount: trips.length,
+                itemBuilder: (context, index) {
+                  final trip = trips[index];
+
+                  return Padding(
+                    padding: EdgeInsets.only(bottom: 8),
+                    child: TripCard(
+                      typeCardSize: TypeCardSize.small,
+                      imageUrl: trip.photo,
+                      title: trip.title,
+                      price: trip.price,
+                      rating: trip.rating,
+                      reviews: trip.reviews,
+                      type: trip.type,
+                      typeCard: TypeCard.order,
+                      isSelected:
+                          _selectedTrip.any((item) => item.id == trip.id),
+                      onTap: () => {addToSelected(trip)},
+                    ),
+                  );
+                },
+              );
+            }),
+            bottomNavigationBar: BlocBuilder<CartCubit, List<TripModel>>(
+                builder: (context, trips) {
+              if (trips.isEmpty) {
+                return SizedBox();
+              }
+
+              return Container(
+                width: double.infinity,
+                color: Colors.white,
+                child: Padding(
+                    padding: EdgeInsets.symmetric(
+                        horizontal: ResponsiveUtil.getHorizontalPadding(),
+                        vertical: 12.w),
+                    child: Row(
+                      mainAxisSize: MainAxisSize.min,
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      children: [
+                        Column(
+                          mainAxisSize: MainAxisSize.min,
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text("Total",
+                                style: TextStyle(
+                                    fontSize: 12.sp,
+                                    fontWeight: FontWeight.w600)),
+                            Text(formatCurrency(getTotalPrice(_selectedTrip)),
+                                style: TextStyle(
+                                    fontSize: 14.sp,
+                                    fontWeight: FontWeight.bold))
+                          ],
+                        ),
+                        ElevatedButton(
+                            onPressed: () => {
+                                  if (_selectedTrip.isNotEmpty)
+                                    {
+                                      context.push(
+                                          RootRouteName.orderPaymentScreen,
+                                          extra: _selectedTrip)
+                                    }
+                                },
+                            child: Text("Bayar Sekarang"))
+                      ],
+                    )),
+              );
+            })),
       ),
     );
   }

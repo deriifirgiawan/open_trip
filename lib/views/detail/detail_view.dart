@@ -10,6 +10,9 @@ class DetailView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MainDetail(
-        photos: tripModel.photos, child: DetailLayout(data: tripModel));
+      photos: tripModel.photos,
+      trip: tripModel,
+      child: DetailLayout(data: tripModel),
+    );
   }
 }
